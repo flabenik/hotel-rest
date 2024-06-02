@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,7 +35,7 @@ public class Pessoa implements Serializable {
 	@Column(nullable = false, length = 80)
 	private String telefone;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "pessoa_hospedagem", joinColumns = { 
 					@JoinColumn (name = "id_pessoa") },
 			inverseJoinColumns = {

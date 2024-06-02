@@ -1,6 +1,7 @@
 package br.com.hotel.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.hotel.data.CheckinPessoaVO;
 import br.com.hotel.data.PessoaVO;
 import br.com.hotel.services.PessoaServices;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,15 +26,24 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/person/v1")
+@RequestMapping("/api/pessoa/v1")
 @Tag(name = "People", description = "Endpoints for Managing People")
 public class PessoaController {
 	
 	@Autowired
 	private PessoaServices service;
 
+	@GetMapping(value = "/buscaTodosHospedesEHospedagens", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<CheckinPessoaVO> buscaTodosHospedesEHospedagens(){		
+		return service.buscaTodosHospedesEHospedagens();
+	}
 	
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/buscaTodosHospedes", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<PessoaVO> findAll(){		
+		return service.buscaTodosHospedes();
+	}
+	
+	@GetMapping(value = "buscaHospedePorId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Finds all People", description = "Finds all People",
 			tags = {"People"},
 			responses = {
@@ -49,14 +60,36 @@ public class PessoaController {
 				@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
 			}
 		)
-	public PessoaVO findById(
+	public PessoaVO buscaHospedePorId(
 			@PathVariable(value="id") Long id ) throws Exception {		
-		return service.findById(id);
+		return service.buscaHospedePorId(id);
 	}
 	
-	@GetMapping(value = "/findPersonByName/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public PessoaVO findPersonByName(@PathVariable(value = "nome") String nome) {
-		return service.findPersonByName(nome);
+	@GetMapping(value = "buscaHospedeEHospedagensPorId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Finds all People", description = "Finds all People",
+			tags = {"People"},
+			responses = {
+				@ApiResponse(description = "Success", responseCode = "200",
+					content = {
+						@Content(
+							mediaType = "application/json",
+							array = @ArraySchema(schema = @Schema(implementation = CheckinPessoaVO.class))
+						)
+					}),
+				@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+				@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+				@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+				@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+			}
+		)
+	public CheckinPessoaVO buscaHospedeEHospedagensPorId(
+			@PathVariable(value="id") Long id ) throws Exception {		
+		return service.buscaHospedeEHospedagensPorId(id);
+	}
+	
+	@GetMapping(value = "/buscaHospedePorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public PessoaVO buscaHospedePorNome(@PathVariable(value = "nome") String nome) {
+		return service.buscaHospedePorNome(nome);
 	}
 	
 	@GetMapping(value = "/buscaPorTelefone/{telefone}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,30 +102,26 @@ public class PessoaController {
 		return service.buscaPorDocumento(documento);
 	}	
 	
-	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<PessoaVO> findAll(){		
-		return service.findAll();
+	@GetMapping(value = "/hospedagemFinalizada", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Map<String, Object>> buscaHospedesHospedagemFinalizada(){		
+		return service.buscaHospedesHospedagemFinalizada();
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PessoaVO create(
-			@RequestBody PessoaVO person ) throws Exception {		
-		return service.create(person);
+	@GetMapping(value = "/hospedagemAndamento", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Map<String, Object>> buscaHospedesHospedagemAndamento(){		
+		return service.buscaHospedesHospedagemAndamento();
 	}
 	
-	/*
-	 * @PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE,
-	 * produces = MediaType.APPLICATION_JSON_VALUE) public PersonVOV2 createV2(
-	 * 
-	 * @RequestBody PersonVOV2 person ) throws Exception { return
-	 * service.createV2(person); }
-	 */
+	@PostMapping(value = "/cadastraHospede", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public PessoaVO cadastraHospede(
+			@RequestBody PessoaVO pessoa ) throws Exception {		
+		return service.cadastraHospede(pessoa);
+	}
 	
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public PessoaVO update(
-			@RequestBody PessoaVO person ) throws Exception {		
-		return service.update(person);
+	@PutMapping(value = "/atualizaHospede", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public PessoaVO atualizaHospede(
+			@RequestBody PessoaVO pessoa ) throws Exception {		
+		return service.atualizaHospede(pessoa);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -100,6 +129,12 @@ public class PessoaController {
 			@PathVariable(value="id") Long id ) throws Exception {		
 		 service.delete(id);
 		 return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping(value = "/cadastraCheckin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public CheckinPessoaVO cadastraCheckin(
+			@RequestBody CheckinPessoaVO checkin ) throws Exception {		
+		return service.cadastraCheckin(checkin);
 	}
 	
 	

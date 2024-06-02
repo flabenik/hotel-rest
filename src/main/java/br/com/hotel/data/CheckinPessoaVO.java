@@ -13,7 +13,7 @@ import com.github.dozermapper.core.Mapping;
 import br.com.hotel.util.Util;
 
 @JsonPropertyOrder({"id", "nome", "documento", "telefone"})
-public class PessoaVO extends RepresentationModel<PessoaVO> implements Serializable {
+public class CheckinPessoaVO extends RepresentationModel<CheckinPessoaVO> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -23,8 +23,9 @@ public class PessoaVO extends RepresentationModel<PessoaVO> implements Serializa
 	private String nome;
 	private String documento;
 	private String telefone;
+	private List<HospedagemVO> hospedagens;
 	
-	public PessoaVO() {}
+	public CheckinPessoaVO() {}
 
 	public Long getKey() {
 		return key;
@@ -55,7 +56,7 @@ public class PessoaVO extends RepresentationModel<PessoaVO> implements Serializa
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+		this.telefone = (telefone);
 	}
 
 	@Override
@@ -74,9 +75,17 @@ public class PessoaVO extends RepresentationModel<PessoaVO> implements Serializa
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PessoaVO other = (PessoaVO) obj;
+		CheckinPessoaVO other = (CheckinPessoaVO) obj;
 		return Objects.equals(documento, other.documento) && Objects.equals(key, other.key)
 				&& Objects.equals(nome, other.nome) && Objects.equals(telefone, other.telefone);
+	}
+
+	public List<HospedagemVO> getHospedagens() {
+		return hospedagens;
+	}
+
+	public void setHospedagens(List<HospedagemVO> hospedagens) {
+		this.hospedagens = hospedagens;
 	}
 
 }
