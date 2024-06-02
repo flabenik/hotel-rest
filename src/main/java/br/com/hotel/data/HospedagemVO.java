@@ -1,7 +1,7 @@
 package br.com.hotel.data;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.dozermapper.core.Mapping;
@@ -15,10 +15,10 @@ public class HospedagemVO implements Serializable {
 	private Long key;
 	
 	@Mapping("dataEntrada")
-	private Date dataEntrada;
+	private LocalDateTime dataEntrada;
 	
 	@Mapping("dataSaida")
-	private Date dataSaida;
+	private LocalDateTime dataSaida;
 	
 	@Mapping("adicionalVeiculo")
 	private Boolean adicionalVeiculo;
@@ -34,19 +34,19 @@ public class HospedagemVO implements Serializable {
 		this.key = key;
 	}
 
-	public Date getDataEntrada() {
+	public LocalDateTime getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(Date dataEntrada) {
+	public void setDataEntrada(LocalDateTime dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public Date getDataSaida() {
+	public LocalDateTime getDataSaida() {
 		return dataSaida;
 	}
 
-	public void setDataSaida(Date dataSaida) {
+	public void setDataSaida(LocalDateTime dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 

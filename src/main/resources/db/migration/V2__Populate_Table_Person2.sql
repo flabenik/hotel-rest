@@ -1,16 +1,24 @@
 INSERT INTO pessoa (nome, documento, telefone) VALUES
-	('FLAVIA BENIK', 'dsadasda', '41999115124'),
-	('NIGRI BENIK', 'dsddas', '41999115124'),
-	('JESS LUNA', 'dsdas', '41987765342');
+	('FLAVIA BENIK', '92516345054', '41999115124'),
+	('NIGRI BENIK', '19287376093', '41999115125'),
+	('JESS LUNA', '82862727067', '41987765342'),
+	('KEANU REEVES', '25773634007', '41999999999'),
+	('CARRIE-ANNE MOSS', '67623620010', '41999999988');
 
-INSERT INTO hospedagem (data_entrada, data_saida, adicional_veiculo) VALUES
-	('2024-05-27T08:00:00', '2024-05-30T10:17:00', true),
-	('2024-05-27T08:00:00', '2024-06-02T10:17:00', false),
-	('2024-06-01T08:00:00', '2024-06-02T10:17:00', true),
-	('2024-04-27T08:00:00', '2024-04-30T10:17:00', true);
+
+INSERT INTO hospedagem (data_entrada, data_saida, adicional_veiculo, valor_estadia) VALUES
+	('2024-05-27T08:00:00', '2024-05-30T10:17:00', true, '540'),
+	('2024-05-27T08:00:00', '2024-06-02T10:17:00', false,'900'),
+	('2024-06-01T08:00:00', '2024-06-02T10:17:00', true, '340'),
+	('2024-06-02T08:00:00', '2024-06-05T17:00:00', false, '750'),
+	('2024-06-02T08:00:00', '2024-06-05T17:00:00', true, '830'),
+	('2024-06-02T08:00:00', '2024-06-05T17:00:00', true, '830');
 
 INSERT INTO pessoa_hospedagem (id_pessoa, id_hospedagem) VALUES
 	(1,1),
-	(1,4),
 	(2,2),
-	(3,3);
+	(3,3),
+	(4,4),
+	(5,5),
+	(1,6);
+	

@@ -1,7 +1,7 @@
 package br.com.hotel.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,15 +23,18 @@ public class Hospedagem implements Serializable {
 	private Long id;
 	
 	@Column(name = "data_entrada", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataEntrada;
+	@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime dataEntrada;
 	
 	@Column(name = "data_saida", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataSaida;
+	@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime dataSaida;
 	
 	@Column(name = "adicional_veiculo", nullable = false)
 	private Boolean adicionalVeiculo;
+	
+	@Column(name = "valor_estadia", nullable = false)
+	private Double valorEstadia;
 	
 	public Hospedagem() {}
 
@@ -43,19 +46,19 @@ public class Hospedagem implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataEntrada() {
+	public LocalDateTime getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(Date dataEntrada) {
+	public void setDataEntrada(LocalDateTime dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public Date getDataSaida() {
+	public LocalDateTime getDataSaida() {
 		return dataSaida;
 	}
 
-	public void setDataSaida(Date dataSaida) {
+	public void setDataSaida(LocalDateTime dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 
@@ -66,12 +69,13 @@ public class Hospedagem implements Serializable {
 	public void setAdicionalVeiculo(Boolean adicionalVeiculo) {
 		this.adicionalVeiculo = adicionalVeiculo;
 	}
-	
-	
 
-	
-	
-	
-	
+	public Double getValorEstadia() {
+		return valorEstadia;
+	}
 
+	public void setValorEstadia(Double valorEstadia) {
+		this.valorEstadia = valorEstadia;
+	}
+	
 }

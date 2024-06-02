@@ -35,6 +35,8 @@ public class Pessoa implements Serializable {
 	@Column(nullable = false, length = 80)
 	private String telefone;
 	
+	
+	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "pessoa_hospedagem", joinColumns = { 
 					@JoinColumn (name = "id_pessoa") },
@@ -76,6 +78,7 @@ public class Pessoa implements Serializable {
 		this.telefone = telefone;
 	}
 	
+
 	public List<Hospedagem> getHospedagens() {
 		return hospedagens;
 	}

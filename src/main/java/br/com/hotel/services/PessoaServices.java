@@ -4,13 +4,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.time.DayOfWeek;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -168,22 +164,13 @@ public class PessoaServices {
 	}
 	
 	private Pessoa calculaDiaria(Pessoa entity) {
-		Pessoa person = entity;
+		Pessoa pessoa = entity;
 		List<Hospedagem> hospedagem = entity.getHospedagens();
 		
 		double valor = 0;
 		
-	    //long daysBetween = (Duration.between(date1, date2).toDays())+1;
-	    //System.out.println ("Days: " + daysBetween);
-		
-		Date dataEntradaDate = hospedagem.get(0).getDataEntrada();
-		Date dataSaidaDate = hospedagem.get(0).getDataSaida();
-		
-		System.out.println ("dataEntrada: " + dataEntradaDate);
-	    System.out.println ("dataSaida: " + dataSaidaDate);
-		
-		LocalDateTime date1 = dataEntradaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-		LocalDateTime date2 = dataSaidaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime date1 = hospedagem.get(0).getDataEntrada();
+		LocalDateTime date2 = hospedagem.get(0).getDataSaida();
 	    
 	    LocalDate dataEntrada = date1.toLocalDate();
 	    LocalDate dataSaida = date2.toLocalDate();
@@ -201,9 +188,24 @@ public class PessoaServices {
 	    	    }
 	    	}
 	    }
+	    //Verifica data e horário saída
+	    if( date2.getHour() >= 16 & date2.getMinute() >=30 ) {
+	    	if (dataSaida.getDayOfWeek() == DayOfWeek.SATURDAY || dataSaida.getDayOfWeek() == DayOfWeek.SUNDAY) {
+	    		valor += 150;
+	    		if (hospedagem.get(0).getAdicionalVeiculo()) {
+	    	    	valor += 20;
+	    	    }
+	    	}else {
+	    		valor += 120;
+	    		if (hospedagem.get(0).getAdicionalVeiculo()) {
+	    	    	valor += 15;
+	    	    }
+	    	}
+	    }
+	    
 	    System.out.println("VALOR: " + valor);
-	    //TO DO
-		return null;
+	    pessoa.getHospedagens().get(0).setValorEstadia(valor);
+		return pessoa;
 	}
 
 	private Pessoa formataPessoa(Pessoa entity) {
