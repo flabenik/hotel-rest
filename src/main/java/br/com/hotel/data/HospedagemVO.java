@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.dozermapper.core.Mapping;
 
+@JsonPropertyOrder({"id", "dataEntrada", "dataSaida", "adicionalVeiculo", "valorEstadia"})
 public class HospedagemVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,9 @@ public class HospedagemVO implements Serializable {
 	
 	@Mapping("adicionalVeiculo")
 	private Boolean adicionalVeiculo;
+	
+	@Mapping("valorEstadia")
+	private double valorEstadia;
 	
 	public HospedagemVO() {}
 
@@ -57,12 +62,13 @@ public class HospedagemVO implements Serializable {
 	public void setAdicionalVeiculo(Boolean adicionalVeiculo) {
 		this.adicionalVeiculo = adicionalVeiculo;
 	}
-	
-	
 
-	
-	
-	
-	
+	public double getValorEstadia() {
+		return valorEstadia;
+	}
+
+	public void setValorEstadia(double valorEstadia) {
+		this.valorEstadia = valorEstadia;
+	}
 
 }

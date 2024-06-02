@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hotel.data.HospedagemVO;
-import br.com.hotel.data.CheckinPessoaVO;
 import br.com.hotel.services.HospedagemServices;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -25,7 +24,7 @@ public class HospedagemController {
 	private HospedagemServices service;
 
 	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/buscaTodos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<HospedagemVO> findAll(){		
 		return service.findAll();
 	}

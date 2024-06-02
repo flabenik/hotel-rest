@@ -1,8 +1,5 @@
 package br.com.hotel.services;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,7 +7,6 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.hotel.controllers.HospedagemController;
 import br.com.hotel.data.HospedagemVO;
 import br.com.hotel.exception.RequiredObjectIsNullException;
 import br.com.hotel.exception.ResourceNotFoundException;

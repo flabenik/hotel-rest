@@ -10,8 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.dozermapper.core.Mapping;
 
-import br.com.hotel.util.Util;
-
 @JsonPropertyOrder({"id", "nome", "documento", "telefone"})
 public class CheckinPessoaVO extends RepresentationModel<CheckinPessoaVO> implements Serializable {
 

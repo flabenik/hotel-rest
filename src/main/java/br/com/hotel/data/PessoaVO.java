@@ -1,7 +1,6 @@
 package br.com.hotel.data;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.hateoas.RepresentationModel;
@@ -9,8 +8,6 @@ import org.springframework.hateoas.RepresentationModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.dozermapper.core.Mapping;
-
-import br.com.hotel.util.Util;
 
 @JsonPropertyOrder({"id", "nome", "documento", "telefone"})
 public class PessoaVO extends RepresentationModel<PessoaVO> implements Serializable {
