@@ -1,0 +1,413 @@
+{
+	"info": {
+		"_postman_id": "af8ce647-9ed4-4469-9efe-f0f40b344d9b",
+		"name": "Hotel Senior",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34325913"
+	},
+	"item": [
+		{
+			"name": "Busca Todos Hospedes e Hospedagens",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/buscaTodosHospedesEHospedagens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"buscaTodosHospedesEHospedagens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Todos Hospedes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/buscaTodosHospedes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"buscaTodosHospedes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Todos Hospedagens",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/hospedagem/v1/buscaTodos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"hospedagem",
+						"v1",
+						"buscaTodos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Hospedes e suas Hospedagens Por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/buscaHospedeEHospedagensPorId/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"buscaHospedeEHospedagensPorId",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Hospedes Por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/buscaHospedePorId/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"buscaHospedePorId",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Hospedes Por Nome",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/buscaHospedePorNome/Flavia Benik",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"buscaHospedePorNome",
+						"Flavia Benik"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Hospedes Por Nome parcial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/buscaHospedePorNome/fla",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"buscaHospedePorNome",
+						"fla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Hospedes Por Telefone",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/buscaPorTelefone/41987765342",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"buscaPorTelefone",
+						"41987765342"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Hospedes Por Documento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/buscaPorDocumento/92516345054",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"buscaPorDocumento",
+						"92516345054"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Hospedagens Finalizadas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/hospedagemFinalizada",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"hospedagemFinalizada"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Hospedagens Em Andamento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/hospedagemAndamento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"hospedagemAndamento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastra Hospede",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"FLAVIA BENIK1\",\r\n    \"documento\": \"dsadasda\",\r\n    \"telefone\": \"41999116666\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/cadastraHospede",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"cadastraHospede"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza Cadastro Hospede",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"6\",\r\n    \"nome\": \"FLAVIA ATUALIZADO\",\r\n    \"documento\": \"dsadasda\",\r\n    \"telefone\": \"41999115124\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/atualizaHospede",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"atualizaHospede"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta Cadastro Hospede",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastra Checkin Novo Hospede",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"NOVO BENIK\",\r\n    \"documento\": \"dsadasda\",\r\n    \"telefone\": \"4321312323\",\r\n    \"hospedagens\": [\r\n        {\r\n            \"dataEntrada\": \"2024-05-27T03:00:00\",\r\n            \"dataSaida\": \"2024-05-30T03:00:00\",\r\n            \"adicionalVeiculo\": true\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/cadastraCheckin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"cadastraCheckin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastra Checkin Hospede Cadastrado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"FLAVIA BENIK\",\r\n    \"documento\": \"92516345054\",\r\n    \"telefone\": \"41999115124\",\r\n    \"hospedagens\": [\r\n        {\r\n            \"dataEntrada\": \"2024-05-28T03:00:00\",\r\n            \"dataSaida\": \"2024-05-30T16:45:00\",\r\n            \"adicionalVeiculo\": true\r\n            \r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/v1/cadastraCheckin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"v1",
+						"cadastraCheckin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
