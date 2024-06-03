@@ -5,9 +5,12 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -36,6 +39,18 @@ public class Hospedagem implements Serializable {
 	@Column(name = "valor_estadia", nullable = false)
 	private Double valorEstadia;
 	
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_pessoa")
+	private Pessoa pessoa;
+	
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
 	public Hospedagem() {}
 
 	public Long getId() {

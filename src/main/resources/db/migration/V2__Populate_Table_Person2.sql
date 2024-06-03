@@ -6,13 +6,13 @@ INSERT INTO pessoa (nome, documento, telefone) VALUES
 	('CARRIE-ANNE MOSS', '67623620010', '41999999988');
 
 
-INSERT INTO hospedagem (data_entrada, data_saida, adicional_veiculo, valor_estadia) VALUES
-	('2024-05-27T08:00:00', '2024-05-30T10:17:00', true, '540'),
-	('2024-05-27T08:00:00', '2024-06-02T10:17:00', false,'900'),
-	('2024-06-01T08:00:00', '2024-06-02T10:17:00', true, '340'),
-	('2024-06-02T08:00:00', '2024-06-05T17:00:00', false, '750'),
-	('2024-06-02T08:00:00', '2024-06-05T17:00:00', true, '830'),
-	('2024-06-02T08:00:00', '2024-06-05T17:00:00', true, '830');
+INSERT INTO hospedagem (data_entrada, data_saida, adicional_veiculo, valor_estadia, id_pessoa) VALUES
+	('2024-05-27T08:00:00', '2024-05-30T10:17:00', true, '540',1),
+	('2024-05-27T08:00:00', '2024-06-02T10:17:00', false,'900',2),
+	('2024-06-01T08:00:00', '2024-06-02T10:17:00', true, '340',3),
+	('2024-06-02T08:00:00', '2024-06-05T17:00:00', false, '750',4),
+	('2024-06-02T08:00:00', '2024-06-05T17:00:00', true, '830',5),
+	('2024-06-02T08:00:00', '2024-06-05T17:00:00', true, '830',1);
 
 INSERT INTO pessoa_hospedagem (id_pessoa, id_hospedagem) VALUES
 	(1,1),
@@ -21,4 +21,3 @@ INSERT INTO pessoa_hospedagem (id_pessoa, id_hospedagem) VALUES
 	(4,4),
 	(5,5),
 	(1,6);
-	

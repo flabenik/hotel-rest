@@ -5,15 +5,15 @@ CREATE TABLE IF NOT EXISTS public.pessoa
     documento character varying(80) NOT NULL,
     telefone character varying(80) NOT NULL
 );
-
-
+	
 CREATE TABLE IF NOT EXISTS public.hospedagem
 (
 	id serial CONSTRAINT pk_hospedagem_id PRIMARY KEY,
     data_entrada TIMESTAMP NOT NULL,
     data_saida TIMESTAMP NOT NULL,
     adicional_veiculo BOOLEAN NOT NULL,
-	valor_estadia FLOAT8 NOT NULL
+	valor_estadia FLOAT8 NOT NULL,
+	id_pessoa BIGINT NOT NULL REFERENCES pessoa(id)
 );
 
 CREATE TABLE IF NOT EXISTS public.pessoa_hospedagem

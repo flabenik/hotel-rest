@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.hotel.controllers.PessoaController;
 import br.com.hotel.data.CheckinPessoaVO;
+import br.com.hotel.data.HospedagemVO;
 import br.com.hotel.data.PessoaVO;
 import br.com.hotel.exception.RequiredObjectIsNullException;
 import br.com.hotel.exception.ResourceNotFoundException;
@@ -158,7 +159,13 @@ public class PessoaServices {
 		logger.info("Create PersonVO");
 		if(person == null) throw new RequiredObjectIsNullException();
 		Pessoa entity = ModMapper.parseObject(person, Pessoa.class);
-		entity= calculaDiaria(entity);
+		if(entity.getId() != null ) {
+			entity.getHospedagens().get(0).setPessoa(entity);
+		}
+
+		entity.getHospedagens().get(0).setPessoa(entity);
+		
+		entity= calculaDiaria(entity);		
 		CheckinPessoaVO entityVO = ModMapper.parseObject(repository.save(entity), CheckinPessoaVO.class);
 		entityVO.add(linkTo(methodOn(PessoaController.class).buscaHospedePorId(entityVO.getKey())).withSelfRel());
 		return entityVO;
@@ -204,7 +211,6 @@ public class PessoaServices {
 	    	}
 	    }
 	    
-	    System.out.println("VALOR: " + valor);
 	    pessoa.getHospedagens().get(0).setValorEstadia(valor);
 		return pessoa;
 	}

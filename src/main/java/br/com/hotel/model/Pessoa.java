@@ -35,13 +35,7 @@ public class Pessoa implements Serializable {
 	@Column(nullable = false, length = 80)
 	private String telefone;
 	
-	
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "pessoa_hospedagem", joinColumns = { 
-					@JoinColumn (name = "id_pessoa") },
-			inverseJoinColumns = {
-					@JoinColumn (name = "id_hospedagem")})
+	@OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL)//, cascade = CascadeType.ALL)
 	private List<Hospedagem> hospedagens;
 	
 	public Pessoa() {}
