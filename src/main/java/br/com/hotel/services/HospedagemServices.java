@@ -23,14 +23,14 @@ public class HospedagemServices {
 	HospedagemRepository repository;
 	
 	public List<HospedagemVO> findAll() {
-		logger.info("Finding all people");		
+		logger.info("Retorna todas as hospedagens");		
 		List<HospedagemVO> hospedagens = new ArrayList<HospedagemVO>();
 		hospedagens = ModMapper.parseListObjects(repository.findAll(), HospedagemVO.class);
 		return hospedagens;
 	}
 	
 	public HospedagemVO findById(Long id) throws Exception {
-		logger.info("Finding Person");
+		logger.info("Encontra Hospedagem por ID");
 		Hospedagem entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
@@ -40,7 +40,7 @@ public class HospedagemServices {
 	}
 	
 	public HospedagemVO cadastraHospedagem(HospedagemVO person) throws Exception {
-		logger.info("Create PersonVO");
+		logger.info("Cadastra Hospedagem");
 		if(person == null) throw new RequiredObjectIsNullException();
 		
 		Hospedagem entity = ModMapper.parseObject(person, Hospedagem.class);

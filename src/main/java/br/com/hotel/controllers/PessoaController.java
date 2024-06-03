@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/pessoa/v1")
-@Tag(name = "Pessoa Hospede", description = "Endpoints para manter Hospede")
+@Tag(name = "Hospede", description = "Endpoints para manter Hospede")
 public class PessoaController {
 	
 	@Autowired
@@ -39,25 +39,36 @@ public class PessoaController {
 	}
 	
 	@GetMapping(value = "/buscaTodosHospedes", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Busca Todos os Hospedes", description = "Busca Todos os Hospedes",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						array = @ArraySchema(schema = @Schema(implementation = PessoaVO.class))
+					)
+				}),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+				}
+			)
 	public List<PessoaVO> findAll(){		
 		return service.buscaTodosHospedes();
 	}
 	
 	@GetMapping(value = "buscaHospedePorId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	@Operation(summary = "Finds all People", description = "Finds all People",
-			tags = {"People"},
+	@Operation(summary = "Busca Hospede por ID", description = "Busca Hospede por ID",
 			responses = {
-				@ApiResponse(description = "Success", responseCode = "200",
-					content = {
-						@Content(
-							mediaType = "application/json",
-							array = @ArraySchema(schema = @Schema(implementation = PessoaVO.class))
-						)
-					}),
-				@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
-				@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
-				@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
-				@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+			@ApiResponse(description = "Success", responseCode = "200",
+				content = @Content(schema = @Schema(implementation = PessoaVO.class))
+					),
+			@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
 			}
 		)
 	public PessoaVO buscaHospedePorId(
@@ -66,20 +77,16 @@ public class PessoaController {
 	}
 	
 	@GetMapping(value = "buscaHospedeEHospedagensPorId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	@Operation(summary = "Finds all People", description = "Finds all People",
-			tags = {"People"},
+	@Operation(summary = "Busca Hospede com suas respectivas hospedagens por ID", description = "Busca Hospede com suas respectivas hospedagens por ID",
 			responses = {
-				@ApiResponse(description = "Success", responseCode = "200",
-					content = {
-						@Content(
-							mediaType = "application/json",
-							array = @ArraySchema(schema = @Schema(implementation = CheckinPessoaVO.class))
-						)
-					}),
-				@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
-				@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
-				@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
-				@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = CheckinPessoaVO.class))
+						),
+			@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
 			}
 		)
 	public CheckinPessoaVO buscaHospedeEHospedagensPorId(
@@ -88,43 +95,143 @@ public class PessoaController {
 	}
 	
 	@GetMapping(value = "/buscaHospedePorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Busca Hospede por Nome", description = "Busca Hospede por Nome",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = PessoaVO.class))
+						),
+			@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+		}
+	)
 	public PessoaVO buscaHospedePorNome(@PathVariable(value = "nome") String nome) {
 		return service.buscaHospedePorNome(nome);
 	}
 	
 	@GetMapping(value = "/buscaPorTelefone/{telefone}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Busca Hospede por Telefone", description = "Busca Hospede por Telefone",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = PessoaVO.class))
+						),
+			@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+		}
+	)
 	public PessoaVO buscaPorTelefone(@PathVariable(value = "telefone") String telefone) {
 		return service.buscaPorTelefone(telefone);
 	}
 	
 	@GetMapping(value = "/buscaPorDocumento/{documento}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Busca Hospede por documento", description = "Busca Hospede por documento",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = PessoaVO.class))
+						),
+			@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+		}
+	)
 	public PessoaVO buscaPorDocumento(@PathVariable(value = "documento") String documento) {
 		return service.buscaPorDocumento(documento);
 	}	
 	
 	@GetMapping(value = "/hospedagemFinalizada", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Busca Todas as Hospedagens Finalizadas", description = "Busca Todas as Hospedagens Finalizadas",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						array = @ArraySchema(schema = @Schema(implementation = List.class))
+					)
+				}),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+				}
+			)
 	public List<Map<String, Object>> buscaHospedesHospedagemFinalizada(){		
 		return service.buscaHospedesHospedagemFinalizada();
 	}
 	
 	@GetMapping(value = "/hospedagemAndamento", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Busca Todas as Hospedagens Em Andamento", description = "Busca Todas as Hospedagens Em Andamento",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						array = @ArraySchema(schema = @Schema(implementation = List.class))
+					)
+				}),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+				}
+			)
 	public List<Map<String, Object>> buscaHospedesHospedagemAndamento(){		
 		return service.buscaHospedesHospedagemAndamento();
 	}
 	
 	@PostMapping(value = "/cadastraHospede", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Cadastra Hospede", description = "Cadastra Hospede",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = PessoaVO.class))
+						),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+		}
+	)
 	public PessoaVO cadastraHospede(
 			@RequestBody PessoaVO pessoa ) throws Exception {		
 		return service.cadastraHospede(pessoa);
 	}
 	
 	@PutMapping(value = "/atualizaHospede", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Atualiza Cadastro Hospede", description = "Atualiza Cadastro Hospede",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = PessoaVO.class))
+						),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+		}
+	)
 	public PessoaVO atualizaHospede(
 			@RequestBody PessoaVO pessoa ) throws Exception {		
 		return service.atualizaHospede(pessoa);
 	}
 	
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Deleta Cadastro Hospede", description = "Deleta Cadastro Hospede",
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = ResponseEntity.class))
+						),
+			@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+		}
+	)
 	public ResponseEntity<?> delete(
 			@PathVariable(value="id") Long id ) throws Exception {		
 		 service.delete(id);
@@ -132,6 +239,19 @@ public class PessoaController {
 	}
 	
 	@PostMapping(value = "/cadastraCheckin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Operation(summary = "Cadastra Check-In Hospede", description = "Cadastra Check-In Hospede",
+	tags = {"checkin"},
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = ResponseEntity.class))
+						),
+				@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+		}
+	)
 	public CheckinPessoaVO cadastraCheckin(
 			@RequestBody CheckinPessoaVO checkin ) throws Exception {		
 		return service.cadastraCheckin(checkin);

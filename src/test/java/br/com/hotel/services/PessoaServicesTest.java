@@ -22,10 +22,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import br.com.hotel.data.CheckinPessoaVO;
 import br.com.hotel.data.PessoaVO;
 import br.com.hotel.exception.RequiredObjectIsNullException;
-import br.com.hotel.mapper.ModMapper;
 import br.com.hotel.mocks.MockPessoa;
 import br.com.hotel.model.Pessoa;
 import br.com.hotel.repository.PessoaRepository;
