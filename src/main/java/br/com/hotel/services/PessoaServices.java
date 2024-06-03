@@ -117,18 +117,19 @@ public class PessoaServices {
 	
 	
 	public PessoaVO cadastraHospede(PessoaVO pessoa) throws Exception {
-		logger.info("Create PersonVO2");
+		logger.info("PessoaService - cadastraHospede");
 		if(pessoa == null) throw new RequiredObjectIsNullException();
 		
 		Pessoa entity = ModMapper.parseObject(pessoa, Pessoa.class);
 		entity= formataPessoa(entity);
-		PessoaVO entityVO = ModMapper.parseObject(repository.save(entity), PessoaVO.class);
+		entity = repository.save(entity);
+		PessoaVO entityVO = ModMapper.parseObject(entity, PessoaVO.class);
 		//entityVO.add(linkTo(methodOn(PessoaController.class).findById(entityVO.getKey())).withSelfRel());
 		return entityVO;
 	}
 
 	public PessoaVO atualizaHospede(PessoaVO pessoa) throws Exception {
-		logger.info("Update PersonVO");
+		logger.info("PessoaService - atualizaHospede");
 		if(pessoa == null) throw new RequiredObjectIsNullException();
 		
 		Pessoa entity = repository.findById(pessoa.getKey())

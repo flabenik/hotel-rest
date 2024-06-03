@@ -89,7 +89,7 @@ public class Pessoa implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(documento, id, nome, telefone);
+		return Objects.hash(documento, hospedagens, id, nome, telefone);
 	}
 
 	@Override
@@ -101,13 +101,11 @@ public class Pessoa implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Pessoa other = (Pessoa) obj;
-		return Objects.equals(documento, other.documento) && Objects.equals(id, other.id)
-				&& Objects.equals(nome, other.nome) && Objects.equals(telefone, other.telefone);
+		return Objects.equals(documento, other.documento) && Objects.equals(hospedagens, other.hospedagens)
+				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
+				&& Objects.equals(telefone, other.telefone);
 	}
 
-
-	
-	
 	
 
 }
