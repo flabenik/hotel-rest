@@ -4,3 +4,5 @@ O Projeto Cria a Base de Dados (POSTGRE) necessária através de migration quand
 
 Há uma collection do postman com todos os endpoint desenvolvidos pronta para teste!
   Arquivo: Hotel Senior.postman_collection.
+
+Acesso ao Swagger: http://localhost:8080/swagger-ui/index.html
