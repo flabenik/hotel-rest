@@ -21,6 +21,7 @@ public class CheckinPessoaVO extends RepresentationModel<CheckinPessoaVO> implem
 	private String nome;
 	private String documento;
 	private String telefone;
+	private double valorEstadiaTotal;
 	private List<HospedagemVO> hospedagens;
 	
 	public CheckinPessoaVO() {}
@@ -55,6 +56,14 @@ public class CheckinPessoaVO extends RepresentationModel<CheckinPessoaVO> implem
 
 	public void setTelefone(String telefone) {
 		this.telefone = (telefone);
+	}
+	
+	public double getValorEstadiaTotal() {
+		return valorEstadiaTotal;
+	}
+
+	public void setValorEstadiaTotal(double valorEstadiaTotal) {
+		this.valorEstadiaTotal = valorEstadiaTotal;
 	}
 
 	@Override

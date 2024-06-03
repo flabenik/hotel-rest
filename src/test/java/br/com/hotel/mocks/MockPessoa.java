@@ -1,5 +1,6 @@
 package br.com.hotel.mocks;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +70,14 @@ public class MockPessoa {
 		pessoa.setNome("Nome Teste" + number);
 		pessoa.setDocumento("Documento" + number);
 		pessoa.setTelefone("Telefone" + number);
-		List<HospedagemVO> hospedagem = new ArrayList<HospedagemVO>();
-		pessoa.setHospedagens(hospedagem);
+		pessoa.setHospedagens(new ArrayList<HospedagemVO>());
+		HospedagemVO hospedagem = new HospedagemVO();
+		hospedagem.setAdicionalVeiculo(true);
+		hospedagem.setDataEntrada(LocalDateTime.now());
+		hospedagem.setDataSaida(LocalDateTime.now().plusDays(5));
+		hospedagem.setKey(number);
+		hospedagem.setValorEstadia(540D);
+		pessoa.getHospedagens().add(hospedagem);
         return pessoa;
     }
 	

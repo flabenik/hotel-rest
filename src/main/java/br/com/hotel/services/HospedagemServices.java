@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.hotel.controllers.HospedagemController;
 import br.com.hotel.data.HospedagemVO;
 import br.com.hotel.exception.RequiredObjectIsNullException;
 import br.com.hotel.exception.ResourceNotFoundException;
@@ -35,18 +36,15 @@ public class HospedagemServices {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
 		HospedagemVO vo =  ModMapper.parseObject(entity, HospedagemVO.class);
-		//vo.add(linkTo(methodOn(HospedagemController.class).findById(id)).withSelfRel());
 		return vo;
 	}
 	
-	public HospedagemVO cadastraHospedagem(HospedagemVO person) throws Exception {
+	public HospedagemVO cadastraHospedagem(HospedagemVO hospedagem) throws Exception {
 		logger.info("Cadastra Hospedagem");
-		if(person == null) throw new RequiredObjectIsNullException();
+		if(hospedagem == null) throw new RequiredObjectIsNullException();
 		
-		Hospedagem entity = ModMapper.parseObject(person, Hospedagem.class);
-		//entity= formataPessoa(entity);
+		Hospedagem entity = ModMapper.parseObject(hospedagem, Hospedagem.class);
 		HospedagemVO entityVO = ModMapper.parseObject(repository.save(entity), HospedagemVO.class);
-		//entityVO.add(linkTo(methodOn(HospedagemController.class).findById(entityVO.getKey())).withSelfRel());
 		return entityVO;
 	}
 	

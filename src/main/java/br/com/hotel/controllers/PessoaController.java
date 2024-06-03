@@ -107,7 +107,7 @@ public class PessoaController {
 			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
 		}
 	)
-	public PessoaVO buscaHospedePorNome(@PathVariable(value = "nome") String nome) {
+	public PessoaVO buscaHospedePorNome(@PathVariable(value = "nome") String nome) throws Exception {
 		return service.buscaHospedePorNome(nome);
 	}
 	
@@ -124,7 +124,7 @@ public class PessoaController {
 			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
 		}
 	)
-	public PessoaVO buscaPorTelefone(@PathVariable(value = "telefone") String telefone) {
+	public PessoaVO buscaPorTelefone(@PathVariable(value = "telefone") String telefone) throws Exception {
 		return service.buscaPorTelefone(telefone);
 	}
 	
@@ -141,7 +141,7 @@ public class PessoaController {
 			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
 		}
 	)
-	public PessoaVO buscaPorDocumento(@PathVariable(value = "documento") String documento) {
+	public PessoaVO buscaPorDocumento(@PathVariable(value = "documento") String documento) throws Exception {
 		return service.buscaPorDocumento(documento);
 	}	
 	

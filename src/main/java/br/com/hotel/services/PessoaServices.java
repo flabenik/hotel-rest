@@ -35,49 +35,50 @@ public class PessoaServices {
 	PessoaRepository repository;
 	
 	public List<CheckinPessoaVO> buscaTodosHospedesEHospedagens() {
-		logger.info("Finding all people");		
-		List<CheckinPessoaVO> persons = new ArrayList<CheckinPessoaVO>();
-		persons = ModMapper.parseListObjects(repository.findAll(), CheckinPessoaVO.class);
-		persons.stream().forEach(p -> {
+		logger.info("PessoaService - buscaTodosHospedesEHospedagens");			
+		List<CheckinPessoaVO> pessoas = new ArrayList<CheckinPessoaVO>();
+		pessoas = ModMapper.parseListObjects(repository.findAll(), CheckinPessoaVO.class);
+		pessoas.stream().forEach(p -> {
 			try {
 				p.add(linkTo(methodOn(PessoaController.class).buscaHospedePorId(p.getKey())).withSelfRel());
+				p.setValorEstadiaTotal(calculaValorEstadiaTotal(p.getHospedagens()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
-		return persons;
+		return pessoas;
 	}
 	
 	public List<PessoaVO> buscaTodosHospedes() {
-		logger.info("Finding all people");		
-		List<PessoaVO> persons = new ArrayList<PessoaVO>();
-		persons = ModMapper.parseListObjects(repository.findAll(), PessoaVO.class);
-		persons.stream().forEach(p -> {
+		logger.info("PessoaService - buscaTodosHospedes");		
+		List<PessoaVO> pessoas = new ArrayList<PessoaVO>();
+		pessoas = ModMapper.parseListObjects(repository.findAll(), PessoaVO.class);
+		pessoas.stream().forEach(p -> {
 			try {
 				p.add(linkTo(methodOn(PessoaController.class).buscaHospedePorId(p.getKey())).withSelfRel());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
-		return persons;
+		return pessoas;
 	}
 	
 	public List<Map<String, Object>> buscaHospedesHospedagemFinalizada() {
-		logger.info("Finding all people");		
+		logger.info("PessoaService - buscaHospedesHospedagemFinalizada");	
 		List<Map<String, Object>> pessoasHospedagem = new ArrayList<Map<String, Object>>();
 		pessoasHospedagem = repository.buscaHospedesHospedagemFinalizada();
 		return pessoasHospedagem;
 	}
 	
 	public List<Map<String, Object>> buscaHospedesHospedagemAndamento() {
-		logger.info("Finding all people");		
+		logger.info("PessoaService - buscaHospedesHospedagemAndamento");	
 		List<Map<String, Object>> pessoasHospedagem = new ArrayList<Map<String, Object>>();
 		pessoasHospedagem = repository.buscaHospedesHospedagemAndamento();
 		return pessoasHospedagem;
 	}
 	
 	public PessoaVO buscaHospedePorId(Long id) throws Exception {
-		logger.info("Finding Person");
+		logger.info("PessoaService - buscaHospedePorId");
 		Pessoa entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
@@ -87,35 +88,39 @@ public class PessoaServices {
 	}
 
 	public CheckinPessoaVO buscaHospedeEHospedagensPorId(Long id) throws Exception {
-		logger.info("Finding Person");
+		logger.info("PessoaService - buscaHospedeEHospedagensPorId");
 		Pessoa entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
 		CheckinPessoaVO vo =  ModMapper.parseObject(entity, CheckinPessoaVO.class);
+		vo.setValorEstadiaTotal(calculaValorEstadiaTotal(vo.getHospedagens()));
 		vo.add(linkTo(methodOn(PessoaController.class).buscaHospedeEHospedagensPorId(id)).withSelfRel());
 		return vo;
 	}
 	
-	public PessoaVO buscaHospedePorNome(String nome) {
-		Pessoa person = repository.buscaHospedePorNome(nome.toUpperCase());
-		PessoaVO vo = ModMapper.parseObject(person, PessoaVO.class);
+	public PessoaVO buscaHospedePorNome(String nome) throws Exception {
+		logger.info("PessoaService - buscaHospedePorNome");
+		Pessoa pessoa = repository.buscaHospedePorNome(nome.toUpperCase());
+		PessoaVO vo = ModMapper.parseObject(pessoa, PessoaVO.class);
+		vo.add(linkTo(methodOn(PessoaController.class).buscaHospedeEHospedagensPorId(vo.getKey())).withSelfRel());
 		return vo;
 	}
 	
-	public PessoaVO buscaPorTelefone(String telefone) {
-		Pessoa person = repository.buscaPorTelefone(telefone);
-		PessoaVO vo = ModMapper.parseObject(person, PessoaVO.class);
+	public PessoaVO buscaPorTelefone(String telefone) throws Exception {
+		logger.info("PessoaService - buscaPorTelefone");
+		Pessoa pessoa = repository.buscaPorTelefone(telefone);
+		PessoaVO vo = ModMapper.parseObject(pessoa, PessoaVO.class);
+		vo.add(linkTo(methodOn(PessoaController.class).buscaHospedeEHospedagensPorId(vo.getKey())).withSelfRel());
 		return vo;
 	}
-	
 
-	public PessoaVO buscaPorDocumento(String documento) {
-		Pessoa person = repository.buscaPorDocumento(documento);
-		PessoaVO vo = ModMapper.parseObject(person, PessoaVO.class);
+	public PessoaVO buscaPorDocumento(String documento) throws Exception {
+		logger.info("PessoaService - buscaPorDocumento");
+		Pessoa pessoa = repository.buscaPorDocumento(documento);
+		PessoaVO vo = ModMapper.parseObject(pessoa, PessoaVO.class);
+		vo.add(linkTo(methodOn(PessoaController.class).buscaHospedeEHospedagensPorId(vo.getKey())).withSelfRel());
 		return vo;
 	}
-	
-	
 	
 	public PessoaVO cadastraHospede(PessoaVO pessoa) throws Exception {
 		logger.info("PessoaService - cadastraHospede");
@@ -125,7 +130,7 @@ public class PessoaServices {
 		entity= formataPessoa(entity);
 		entity = repository.save(entity);
 		PessoaVO entityVO = ModMapper.parseObject(entity, PessoaVO.class);
-		//entityVO.add(linkTo(methodOn(PessoaController.class).findById(entityVO.getKey())).withSelfRel());
+		entityVO.add(linkTo(methodOn(PessoaController.class).buscaHospedePorId(entityVO.getKey())).withSelfRel());
 		return entityVO;
 	}
 
@@ -147,7 +152,7 @@ public class PessoaServices {
 	}
 	
 	public void delete(Long id) {
-		logger.info("Delete PersonVO");
+		logger.info("PessoaService - delete");
 		
 		Pessoa entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado para esse ID!"));
@@ -155,10 +160,10 @@ public class PessoaServices {
 		repository.delete(entity);
 	}
 	
-	public CheckinPessoaVO cadastraCheckin(CheckinPessoaVO person) throws Exception {
-		logger.info("Create PersonVO");
-		if(person == null) throw new RequiredObjectIsNullException();
-		Pessoa entity = ModMapper.parseObject(person, Pessoa.class);
+	public CheckinPessoaVO cadastraCheckin(CheckinPessoaVO pessoa) throws Exception {
+		logger.info("PessoaService - cadastraCheckin");
+		if(pessoa == null) throw new RequiredObjectIsNullException();
+		Pessoa entity = ModMapper.parseObject(pessoa, Pessoa.class);
 		if(entity.getId() != null ) {
 			entity.getHospedagens().get(0).setPessoa(entity);
 		}
@@ -214,13 +219,21 @@ public class PessoaServices {
 	    pessoa.getHospedagens().get(0).setValorEstadia(valor);
 		return pessoa;
 	}
+	
+	private double calculaValorEstadiaTotal(List<HospedagemVO> hospedagens) {
+		double valorTotal = 0;
+		for (HospedagemVO hospedagemVO : hospedagens) {
+			valorTotal += hospedagemVO.getValorEstadia();
+		}
+		return valorTotal;
+	}
 
 	private Pessoa formataPessoa(Pessoa entity) {
-		Pessoa person = entity;
-		person.setNome(entity.getNome().toUpperCase());
-		person.setDocumento(Util.removeCaracteresEspeciais(entity.getDocumento()));
-		person.setTelefone(Util.removeCaracteresEspeciais(entity.getTelefone()));
-		return person;
+		Pessoa pessoa = entity;
+		pessoa.setNome(entity.getNome().toUpperCase());
+		pessoa.setDocumento(Util.removeCaracteresEspeciais(entity.getDocumento()));
+		pessoa.setTelefone(Util.removeCaracteresEspeciais(entity.getTelefone()));
+		return pessoa;
 	}
 
 

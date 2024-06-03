@@ -26,7 +26,7 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 			 + " FROM pessoa_hospedagem ph "
 			 + " JOIN pessoa p ON ph.id_pessoa = p.id "
 			 + " JOIN hospedagem h ON ph.id_hospedagem = h.id "
-			 + " WHERE  h.data_saida <= CURRENT_DATE + TIME '16:00:00'")
+			 + " WHERE  h.data_saida <= CURRENT_DATE + TIME '16:30:00'")
 	List<Map<String, Object>> buscaHospedesHospedagemFinalizada();
 	
 	@Query(nativeQuery = true, value = "SELECT ph.id_hospedagem, ph.id_pessoa, p.nome, p.documento, h.data_entrada, h.data_saida"

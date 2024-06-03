@@ -22,6 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import br.com.hotel.data.CheckinPessoaVO;
 import br.com.hotel.data.PessoaVO;
 import br.com.hotel.exception.RequiredObjectIsNullException;
 import br.com.hotel.mocks.MockPessoa;
@@ -63,7 +64,6 @@ class PessoaServicesTest {
 		assertNotNull(pessoa1.getKey());
 		assertNotNull(pessoa1.getLinks());
 		
-		//assertTrue(pessoa1.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
 		assertEquals("Nome Teste1", pessoa1.getNome());
 		assertEquals("Documento1", pessoa1.getDocumento());
 		assertEquals("Telefone1", pessoa1.getTelefone());
@@ -74,7 +74,6 @@ class PessoaServicesTest {
 		assertNotNull(pessoa3.getKey());
 		assertNotNull(pessoa3.getLinks());
 		
-		//assertTrue(pessoa1.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
 		assertEquals("Nome Teste3", pessoa3.getNome());
 		assertEquals("Documento3", pessoa3.getDocumento());
 		assertEquals("Telefone3", pessoa3.getTelefone());
@@ -97,7 +96,7 @@ class PessoaServicesTest {
 		assertNotNull(pessoa1.getKey());
 		assertNotNull(pessoa1.getLinks());
 		
-		//assertTrue(pessoa1.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+		assertTrue(pessoa1.toString().contains("links: [</api/pessoa/v1/buscaHospedePorId/1>;rel=\"self\"]"));
 		assertEquals("Nome Teste1", pessoa1.getNome());
 		assertEquals("Documento1", pessoa1.getDocumento());
 		assertEquals("Telefone1", pessoa1.getTelefone());
@@ -108,7 +107,7 @@ class PessoaServicesTest {
 		assertNotNull(pessoa3.getKey());
 		assertNotNull(pessoa3.getLinks());
 		
-		//assertTrue(pessoa1.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+		assertTrue(pessoa1.toString().contains("links: [</api/pessoa/v1/buscaHospedePorId/1>;rel=\"self\"]"));
 		assertEquals("Nome Teste3", pessoa3.getNome());
 		assertEquals("Documento3", pessoa3.getDocumento());
 		assertEquals("Telefone3", pessoa3.getTelefone());
@@ -143,7 +142,7 @@ class PessoaServicesTest {
 		var result = service.buscaHospedePorId(1L);
 		assertNotNull(result);
 		assertNotNull(result.getKey());
-		//assertNotNull(result.getLinks());
+		assertNotNull(result.getLinks());
 		assertEquals("Nome Teste0", result.getNome());
 		assertEquals("Documento0", result.getDocumento());
 		assertEquals("Telefone0", result.getTelefone());
@@ -157,7 +156,7 @@ class PessoaServicesTest {
 		var result = service.buscaHospedeEHospedagensPorId(1L);
 		assertNotNull(result);
 		assertNotNull(result.getKey());
-		//assertNotNull(result.getLinks());
+		assertNotNull(result.getLinks());
 		assertEquals("Nome Teste0", result.getNome());
 		assertEquals("Documento0", result.getDocumento());
 		assertEquals("Telefone0", result.getTelefone());
@@ -165,42 +164,42 @@ class PessoaServicesTest {
 	}
 
 	@Test
-	void testBuscaHospedePorNome() {
+	void testBuscaHospedePorNome() throws Exception {
 		Pessoa pessoa = input.mockEntity();
 		pessoa.setId(1L);
 		when(repository.buscaHospedePorNome("NOME")).thenReturn(pessoa);
 		var result = service.buscaHospedePorNome("NOME");
 		assertNotNull(result);
 		assertNotNull(result.getKey());
-		//assertNotNull(result.getLinks());
+		assertNotNull(result.getLinks());
 		assertEquals("Nome Teste0", result.getNome());
 		assertEquals("Documento0", result.getDocumento());
 		assertEquals("Telefone0", result.getTelefone());
 	}
 
 	@Test
-	void testBuscaPorTelefone() {
+	void testBuscaPorTelefone() throws Exception {
 		Pessoa pessoa = input.mockEntity();
 		pessoa.setId(1L);
 		when(repository.buscaPorTelefone("Telefone0")).thenReturn(pessoa);
 		var result = service.buscaPorTelefone("Telefone0");
 		assertNotNull(result);
 		assertNotNull(result.getKey());
-		//assertNotNull(result.getLinks());
+		assertNotNull(result.getLinks());
 		assertEquals("Nome Teste0", result.getNome());
 		assertEquals("Documento0", result.getDocumento());
 		assertEquals("Telefone0", result.getTelefone());
 	}
 
 	@Test
-	void testBuscaPorDocumento() {
+	void testBuscaPorDocumento() throws Exception {
 		Pessoa pessoa = input.mockEntity();
 		pessoa.setId(1L);
 		when(repository.buscaPorDocumento("Documento0")).thenReturn(pessoa);
 		var result = service.buscaPorDocumento("Documento0");
 		assertNotNull(result);
 		assertNotNull(result.getKey());
-		//assertNotNull(result.getLinks());
+		assertNotNull(result.getLinks());
 		assertEquals("Nome Teste0", result.getNome());
 		assertEquals("Documento0", result.getDocumento());
 		assertEquals("Telefone0", result.getTelefone());
@@ -221,7 +220,7 @@ class PessoaServicesTest {
 		PessoaVO result = service.cadastraHospede(pessoaVO);
 		assertNotNull(result);
 		assertNotNull(result.getKey());
-		//assertNotNull(result.getLinks());
+		assertNotNull(result.getLinks());
 		assertEquals("NOME TESTE0", result.getNome());
 		assertEquals("Documento00", result.getDocumento());
 		assertEquals("Telefone00", result.getTelefone());
@@ -238,7 +237,6 @@ class PessoaServicesTest {
 		String actualdMessage = exception.getMessage();
 		
 		assertTrue(actualdMessage.contains(expectedMessage));
-		//assertNotNull(result.getLinks());
 		
 	}
 
@@ -256,7 +254,7 @@ class PessoaServicesTest {
 		PessoaVO result = service.atualizaHospede(pessoaVO);
 		assertNotNull(result);
 		assertNotNull(result.getKey());
-		//assertNotNull(result.getLinks());
+		assertNotNull(result.getLinks());
 		assertEquals("NOME TESTE0", result.getNome());
 		assertEquals("Documento00", result.getDocumento());
 		assertEquals("Telefone00", result.getTelefone());
@@ -273,7 +271,6 @@ class PessoaServicesTest {
 		String actualdMessage = exception.getMessage();
 		
 		assertTrue(actualdMessage.contains(expectedMessage));
-		//assertNotNull(result.getLinks());
 		
 	}
 
@@ -286,7 +283,22 @@ class PessoaServicesTest {
 	}
 
 	@Test
-	void testCadastraCheckin() {
+	void testCadastraCheckin() throws Exception {
+		Pessoa pessoa = input.mockEntity();
+		Pessoa persisted = pessoa;
+		persisted.setId(1L);
+		CheckinPessoaVO pessoaVO = input.mockEntityCheckIn(0L);
+		
+		when(repository.save(pessoa)).thenReturn(persisted);
+		//doReturn(persisted).when(repository).save(persisted);
+		
+		CheckinPessoaVO result = service.cadastraCheckin(pessoaVO);
+		assertNotNull(result);
+		assertNotNull(result.getKey());
+		assertNotNull(result.getLinks());
+		assertEquals("NOME TESTE0", result.getNome());
+		assertEquals("Documento00", result.getDocumento());
+		assertEquals("Telefone00", result.getTelefone());
 		fail("Not yet implemented");
 	}
 
